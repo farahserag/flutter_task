@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task001/models/users.dart';
+import 'package:flutter_task001/screens/MapScreen.dart';
 import 'package:flutter_task001/screens/widget/Card.dart';
-import 'package:flutter_task001/utlis.dart';
+import '../utlis.dart';
+//import 'MapScreen.dart';
 
 class UserDetails extends StatefulWidget {
   User user;
@@ -22,7 +24,7 @@ class _UserDetailsState extends State<UserDetails> {
             content: "${widget.user.name}",
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           InkWell(
               onTap: () {
@@ -36,9 +38,7 @@ class _UserDetailsState extends State<UserDetails> {
               onTap: () {
                 launchURL("tel:${widget.user.phone}");
               },
-              child: Text(
-                "phone: ${widget.user.phone}",
-              )),
+              child: Text("phone: ${widget.user.phone}")),
           SizedBox(
             height: 10,
           ),
@@ -50,7 +50,17 @@ class _UserDetailsState extends State<UserDetails> {
               onTap: () {
                 launchURL("https://${widget.user.website}");
               },
-              child: Text("web: ${widget.user.website}"))
+              child: Text("web: ${widget.user.website}")),
+          MaterialButton(
+            onPressed: () {
+              pushPage(
+                  context,
+                  MapSample(
+                    userLoaction: widget.user.address.geo,
+                  ));
+            },
+            child: Text("Map view"),
+          )
         ],
       ),
     );
